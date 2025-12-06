@@ -1,0 +1,14 @@
+.glass-card {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  background-color: rgba(255, 255, 255, 0.08); /* fondo semi transparente */
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 1rem;
+  transition: all 0.3s ease;
+}
+
+/* Hover más brillante */
+.glass-card:hover,
+.glass-highlight {
+  background-color: rgba(255, 255, 255, 0.15);
+}
