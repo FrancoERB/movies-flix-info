@@ -1,5 +1,5 @@
+import { StarIcon } from "../../assets/icons/StarIcon";
 import "../card/cardStyle.css";
-import { StarIcon } from "./StarIcon";
 interface MovieCardProps {
   adult?: boolean;
   backdrop_path?: string;

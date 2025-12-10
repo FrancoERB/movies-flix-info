@@ -1,18 +1,22 @@
-import { useEffect, useState } from "react";
-import { getPopularMovies } from "../../api/getMovies";
-import { MovieCard } from "../../components/card/MovieCard";
-import type { Movie } from "../../types/movie";
+// import { useEffect, useState } from "react";
+// import { getPopularMovies } from "../../api/getMovies";
+// import type { Movie } from "../../types/movie";
+import { HeroCarousel } from "../../components/carousel/herocarousel/HeroCarousel";
+import { NavBar } from "../../components/navBar/navBar";
+import { heroSlides } from "../../mockData/carouselInfo";
 
 export const Home = () => {
-  const [movies, setmovies] = useState<Movie[]>([]);
+  // const [movies, setmovies] = useState<Movie[]>([]);
 
-  useEffect(() => {
-    getPopularMovies().then(setmovies).catch(console.error);
-  }, []);
+  // useEffect(() => {
+  //   getPopularMovies().then(setmovies).catch(console.error);
+  // }, []);
 
   return (
-    <section className="w-full">
-      <h2 className="text-2xl font-semibold mb-6 px-2">
+    <section className="w-full items-center">
+      <NavBar />
+      <HeroCarousel slides={heroSlides} />
+      {/* <h2 className="text-2xl font-semibold mb-6 px-2">
         Películas recomendadas
       </h2>
 
@@ -37,7 +41,7 @@ export const Home = () => {
             poster_path={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
           />
         ))}
-      </div>
+      </div> */}
     </section>
   );
 };
