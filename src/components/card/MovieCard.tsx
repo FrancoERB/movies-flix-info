@@ -19,9 +19,7 @@ interface MovieCardProps {
 
 export const MovieCard = ({
   poster_path,
-  genre_ids,
   title,
-  id,
   vote_average,
   release_date,
 }: MovieCardProps) => {

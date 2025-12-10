@@ -1,47 +1,29 @@
-// import { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import type { Movie } from "../../types/movie";
 // import { getPopularMovies } from "../../api/getMovies";
 // import type { Movie } from "../../types/movie";
+import { CategorysCarousel } from "../../components/carousel/categorysCarousel/CategorysCarousel";
+
+import { getMoviesByGenre } from "../../api/getMovies";
 import { HeroCarousel } from "../../components/carousel/herocarousel/HeroCarousel";
 import { NavBar } from "../../components/navBar/navBar";
 import { heroSlides } from "../../mockData/carouselInfo";
 
 export const Home = () => {
-  // const [movies, setmovies] = useState<Movie[]>([]);
+  const [actionMovies, setActionMovies] = useState<Movie[]>([]);
+  const [sciFiMovies, setSciFiMovies] = useState<Movie[]>([]);
 
-  // useEffect(() => {
-  //   getPopularMovies().then(setmovies).catch(console.error);
-  // }, []);
+  useEffect(() => {
+    getMoviesByGenre(28).then(setActionMovies);
+    getMoviesByGenre(878).then(setSciFiMovies);
+  }, []);
 
   return (
-    <section className="w-full items-center">
+    <section className="w-full items-cente bg-[#0F0F0F]">
       <NavBar />
       <HeroCarousel slides={heroSlides} />
-      {/* <h2 className="text-2xl font-semibold mb-6 px-2">
-        Películas recomendadas
-      </h2>
-
-      <div
-        className="
-          grid 
-          grid-cols-2
-          sm:grid-cols-3 
-          md:grid-cols-4 
-          lg:grid-cols-5 
-          xl:grid-cols-6 
-          gap-6 
-          px-2
-        "
-      >
-        {movies?.map((movie) => (
-          <MovieCard
-            key={movie.id}
-            title={movie.title}
-            release_date={movie.release_date}
-            popularity={movie.popularity}
-            poster_path={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-          />
-        ))}
-      </div> */}
+      <CategorysCarousel title="💥 Action" movies={actionMovies} />
+      <CategorysCarousel title="🚀 Sci-Fi" movies={sciFiMovies} />
     </section>
   );
 };
