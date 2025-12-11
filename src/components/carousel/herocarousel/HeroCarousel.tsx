@@ -7,11 +7,10 @@ import { PlayIcon } from "../../../assets/icons/PlayIcon";
 interface HeroSlide {
   id: number;
   title: string;
-  description: string;
-  imageUrl: string;
-  year: string;
-  rating: number;
-  genre: string;
+  overview: string;
+  backdrop_path: string;
+  release_date?: Date;
+  popularity?: number;
 }
 
 interface HeroCarouselProps {
@@ -47,7 +46,7 @@ export const HeroCarousel = ({ slides }: HeroCarouselProps) => {
           {/* Background Image */}
           <div className="absolute inset-0">
             <img
-              src={slide.imageUrl}
+              src={`https://image.tmdb.org/t/p/original${slide.backdrop_path}`}
               alt={slide.title}
               className="w-full h-full object-cover"
             />
@@ -60,13 +59,13 @@ export const HeroCarousel = ({ slides }: HeroCarouselProps) => {
           <div className="relative h-full w-full max-w-7xl mx-auto px-4 flex items-center">
             <div className="max-w-2xl space-y-6">
               <div className="flex items-center gap-3 text-sm text-[rgb(153_153_153)]">
-                <span className="px-2 py-1 rounded-md bg-[rgb(51_153_255)]/20 text-[rgb(51_153_255)] font-medium">
-                  {slide.genre}
-                </span>
-                <span>{slide.year}</span>
+                {/* <span className="px-2 py-1 rounded-md bg-[rgb(51_153_255)]/20 text-[rgb(51_153_255)] font-medium">
+                  {slide.}
+                </span> */}
+                {/* <span>{slide.release_date?.getDate()}</span> */}
                 <span className="flex items-center gap-1">
                   <span className="text-[rgb(255_198_26)]">★</span>
-                  {slide.rating}
+                  {slide.popularity}
                 </span>
               </div>
               <h1 className="text-5xl md:text-7xl font-bold text-[rgb(250_250_250)] tracking-tight leading-none">
@@ -74,7 +73,7 @@ export const HeroCarousel = ({ slides }: HeroCarouselProps) => {
               </h1>
 
               <p className="text-lg text-[rgb(250_250_250)] line-clamp-3 max-w-xl">
-                {slide.description}
+                {slide.overview}
               </p>
 
               <div className="flex items-center gap-4 pt-2">
@@ -95,13 +94,13 @@ export const HeroCarousel = ({ slides }: HeroCarouselProps) => {
       {/* Navigation Arrows */}
       <button
         onClick={prevSlide}
-        className="absolute left-4 top-1/2 -translate-y-1/2 p-3 rounded-full bg-gray-700 opacity-50 hover:opacity-100 transition-opacity"
+        className="absolute left-4 top-1/2 -translate-y-1/2 p-3 rounded-full bg-gray-700 opacity-10 hover:opacity-100 transition-opacity"
       >
         <ChevronLeftIcon />
       </button>
       <button
         onClick={nextSlide}
-        className="absolute right-4 top-1/2 -translate-y-1/2 p-3 rounded-full bg-gray-700 opacity-50 hover:opacity-100 transition-opacity"
+        className="absolute right-4 top-1/2 -translate-y-1/2 p-3 rounded-full bg-gray-700 opacity-10 hover:opacity-100 transition-opacity"
       >
         <ChevronRightIcon />
       </button>
