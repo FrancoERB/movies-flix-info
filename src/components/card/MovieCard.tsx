@@ -54,11 +54,10 @@ export const MovieCard = ({
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-1.5">
                 <StarIcon />
-                <span className="text-sm font-medium text-foreground">
-                  {vote_average}
+                <span className="text-sm font-medium text-[rgb(250_250_250)]">
+                  {vote_average?.toFixed(1)}
                 </span>
               </div>
-              {/* <span className="text-xs text-muted-foreground">{duration}</span> */}
             </div>
           </div>
         </div>

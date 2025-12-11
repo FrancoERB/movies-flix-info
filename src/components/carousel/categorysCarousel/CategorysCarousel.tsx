@@ -8,7 +8,7 @@ interface Movie {
   title: string;
   poster_path: string;
   release_date?: Date;
-  popularity?: number;
+  vote_average?: number;
 }
 
 interface CategoryCarrouselProps {
@@ -89,7 +89,7 @@ export const CategorysCarousel = ({
                 title={movie.title}
                 poster_path={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
                 release_date={movie.release_date}
-                popularity={movie.popularity}
+                vote_average={movie.vote_average}
               />
             </div>
           ))}

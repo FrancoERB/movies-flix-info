@@ -59,10 +59,12 @@ export const HeroCarousel = ({ slides }: HeroCarouselProps) => {
           <div className="relative h-full w-full max-w-7xl mx-auto px-4 flex items-center">
             <div className="max-w-2xl space-y-6">
               <div className="flex items-center gap-3 text-sm text-[rgb(153_153_153)]">
-                {/* <span className="px-2 py-1 rounded-md bg-[rgb(51_153_255)]/20 text-[rgb(51_153_255)] font-medium">
-                  {slide.}
-                </span> */}
-                {/* <span>{slide.release_date?.getDate()}</span> */}
+                <span>
+                  {slide.release_date
+                    ? new Date(slide.release_date).toLocaleDateString("es-AR")
+                    : "Sin fecha"}
+                </span>
+
                 <span className="flex items-center gap-1">
                   <span className="text-[rgb(255_198_26)]">★</span>
                   {slide.popularity}
@@ -114,7 +116,7 @@ export const HeroCarousel = ({ slides }: HeroCarouselProps) => {
             className={`h-1.5 rounded-full transition-all duration-300 ${
               index === currentSlide
                 ? "w-8 bg-[rgb(250_250_250)]"
-                : "w-1.5 bg-[rgb(153_153_153)]/50 hover:bg-muted-foreground"
+                : "w-1.5 bg-[rgb(153_153_153)]/50 hover:bg-[rgb(153_153_153)]"
             }`}
           />
         ))}

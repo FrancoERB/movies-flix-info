@@ -1,8 +1,13 @@
+import { Link } from "react-router-dom";
 import { BellIcon } from "../../assets/icons/BellIcon";
 import { SearchIcon } from "../../assets/icons/SearchIcon";
 import { UserIcon } from "../../assets/icons/User";
+import { routes } from "../../router/Routes";
 
 export const NavBar = () => {
+  const navLinks = routes.filter(
+    (r) => r.name !== "IniciarSesion" && r.name !== "Registro"
+  );
   return (
     <header className="fixed w-full top-0 left-0 right-0 z-50 transition-all duration-300">
       <div className="bg-gradient-to-b from-[rgb(15_15_15)] via-[rgb(15_15_15)]/80 to-transparent">
@@ -16,15 +21,14 @@ export const NavBar = () => {
 
               {/* Nav Links */}
               <ul className="hidden md:flex items-center gap-6">
-                {["Inicio", "Series", "Películas", "Mi lista"].map((item) => (
-                  <li key={item}>
-                    <a
-                      href="#"
-                      className="text-sm text-zinc-400 hover:text-zinc-100 transition-colors"
-                    >
-                      {item}
-                    </a>
-                  </li>
+                {navLinks.map((item) => (
+                  <Link
+                    key={item.path}
+                    to={item.path}
+                    className="text-white hover:text-red-500 transition"
+                  >
+                    {item.name}
+                  </Link>
                 ))}
               </ul>
             </div>
