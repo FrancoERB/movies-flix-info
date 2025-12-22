@@ -1,6 +1,6 @@
+import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
 import { useEffect, useRef, useState } from "react";
-import { ChevronLeftIcon } from "../../../assets/icons/ChevronLeftIcon";
-import { ChevronRightIcon } from "../../../assets/icons/ChevronRightIcon";
+import { useNavigate } from "react-router-dom";
 import { MovieCard } from "../../card/MovieCard";
 
 interface Movie {
@@ -21,6 +21,7 @@ export const CategorysCarousel = ({
   movies,
 }: CategoryCarrouselProps) => {
   const scrollRef = useRef<HTMLDivElement>(null);
+  const navigate = useNavigate();
 
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
@@ -54,6 +55,10 @@ export const CategorysCarousel = ({
     });
   };
 
+  const onClickMovieId = (id: number) => {
+    navigate(`/movieDetail/${id}`);
+  };
+
   return (
     <section className="relative group/carousel">
       <div className="container my-6 px-[max(1rem,calc((100vw-1280px)/2+1rem))]">
@@ -75,7 +80,7 @@ export const CategorysCarousel = ({
                 : "opacity-0 pointer-events-none"
             }`}
         >
-          <ChevronLeftIcon />
+          <ChevronLeftIcon className="size-8" />
         </button>
 
         {/* Carousel */}
@@ -90,6 +95,7 @@ export const CategorysCarousel = ({
                 poster_path={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
                 release_date={movie.release_date}
                 vote_average={movie.vote_average}
+                onClick={() => onClickMovieId(movie.id)}
               />
             </div>
           ))}
@@ -107,7 +113,7 @@ export const CategorysCarousel = ({
                 : "opacity-0 pointer-events-none"
             }`}
         >
-          <ChevronRightIcon />
+          <ChevronRightIcon className="size-8" />
         </button>
       </div>
     </section>

@@ -1,8 +1,11 @@
+import {
+  ArrowLeftIcon,
+  ArrowRightIcon,
+  InformationCircleIcon,
+  PlayIcon,
+} from "@heroicons/react/24/solid";
 import { useEffect, useState } from "react";
-import { ChevronLeftIcon } from "../../../assets/icons/ChevronLeftIcon";
-import { ChevronRightIcon } from "../../../assets/icons/ChevronRightIcon";
-import { InfoIcon } from "../../../assets/icons/InfoIcon";
-import { PlayIcon } from "../../../assets/icons/PlayIcon";
+import { useNavigate } from "react-router-dom";
 
 interface HeroSlide {
   id: number;
@@ -11,6 +14,7 @@ interface HeroSlide {
   backdrop_path: string;
   release_date?: Date;
   popularity?: number;
+  onClick?: () => void;
 }
 
 interface HeroCarouselProps {
@@ -19,7 +23,7 @@ interface HeroCarouselProps {
 
 export const HeroCarousel = ({ slides }: HeroCarouselProps) => {
   const [currentSlide, setCurrentSlide] = useState(0);
-
+  const navigate = useNavigate();
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
@@ -31,6 +35,18 @@ export const HeroCarousel = ({ slides }: HeroCarouselProps) => {
   const prevSlide = () =>
     setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
   const nextSlide = () => setCurrentSlide((prev) => (prev + 1) % slides.length);
+
+  const onClickMovieId = (id: number) => {
+    navigate(`/movieDetail/${id}`);
+  };
+
+  const onClickButtonPlay = (id: number) => {
+    navigate(`/movieDetail/${id}`);
+    setTimeout(() => {
+      window.scrollTo({ top: 1300, behavior: "smooth" });
+    }, 300);
+  };
+
   return (
     <section className="relative h-[70vh] min-h-[500px] overflow-hidden">
       {/* Slides */}
@@ -39,8 +55,8 @@ export const HeroCarousel = ({ slides }: HeroCarouselProps) => {
           key={slide.id}
           className={`absolute inset-0 transition-all duration-700 ease-out ${
             index === currentSlide
-              ? "opacity-100 scale-100"
-              : "opacity-0 scale-105"
+              ? "opacity-100 scale-100 pointer-events-auto"
+              : "opacity-0 scale-105 pointer-events-none"
           }`}
         >
           {/* Background Image */}
@@ -79,12 +95,20 @@ export const HeroCarousel = ({ slides }: HeroCarouselProps) => {
               </p>
 
               <div className="flex items-center gap-4 pt-2">
-                <button className="rounded-full flex px-8  py-3 gap-2 bg-[rgb(250_250_250)] text-[rgb(15_15_15)] hover:bg-[rgb(15_15_15)]/90 ">
-                  <PlayIcon />
+                <button
+                  className="rounded-full flex px-8  py-3 gap-2 bg-[rgb(250_250_250)] hover:bg-[rgb(250_250_250)]/50 text-[rgb(15_15_15)]"
+                  onClick={() => onClickButtonPlay(slide.id)}
+                >
+                  <PlayIcon className="size-6" />
                   Reproducir
                 </button>
-                <button className="rounded-full flex text-white px-8 py-3 gap-2 border-[rgb(51_51_51)]/50 bg-[rgb(36_36_36)]/50 backdrop-blur-sm hover:bg-[rgb(36_36_36)]">
-                  <InfoIcon />
+                <button
+                  className="rounded-full flex text-white px-8 py-3 gap-2 border-[rgb(51_51_51)]/50 bg-[rgb(36_36_36)] backdrop-blur-sm hover:bg-[rgb(36_36_36)]/50"
+                  onClick={() => {
+                    onClickMovieId(slide.id);
+                  }}
+                >
+                  <InformationCircleIcon className="size-6" />
                   Más info
                 </button>
               </div>
@@ -98,13 +122,13 @@ export const HeroCarousel = ({ slides }: HeroCarouselProps) => {
         onClick={prevSlide}
         className="absolute left-4 top-1/2 -translate-y-1/2 p-3 rounded-full bg-gray-700 opacity-10 hover:opacity-100 transition-opacity"
       >
-        <ChevronLeftIcon />
+        <ArrowLeftIcon className="size-8" />
       </button>
       <button
         onClick={nextSlide}
         className="absolute right-4 top-1/2 -translate-y-1/2 p-3 rounded-full bg-gray-700 opacity-10 hover:opacity-100 transition-opacity"
       >
-        <ChevronRightIcon />
+        <ArrowRightIcon className="size-8" />
       </button>
 
       {/* Dots */}

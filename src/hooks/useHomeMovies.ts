@@ -9,6 +9,7 @@ type State = {
     adventure: Movie[];
     horror: Movie[];
     mistery: Movie[];
+    isLoading: boolean;
 }
 
 type Action = 
@@ -18,6 +19,8 @@ type Action =
     | {type: 'SET_ADVENTURE'; payload: Movie[]}
     | {type: 'SET_HORROR'; payload: Movie[]}
     | {type: 'SET_MISTERY'; payload: Movie[]}
+    | {type: 'SET_LOADING'; payload: boolean}
+
 
 const initialState: State = {
     popular: [],
@@ -26,6 +29,7 @@ const initialState: State = {
     adventure: [],
     horror: [],
     mistery: [],
+    isLoading: true,
 }
 
 function reducer (state : State, action : Action) : State {
@@ -42,6 +46,8 @@ function reducer (state : State, action : Action) : State {
         return {...state, horror: action.payload};
          case 'SET_MISTERY': 
         return {...state, mistery: action.payload};
+         case 'SET_LOADING': 
+        return {...state, isLoading: action.payload};
         default:
             return state;
     }
@@ -51,9 +57,12 @@ export function useHomeMovies() {
     const [state, dispatch] = useReducer(reducer, initialState);
 
     useEffect(() => {
+        dispatch({type:'SET_LOADING', payload: true})
         getPopularMovies().then((data)=>{
             dispatch({type:'SET_POPULAR', payload:data})
-        })
+        }).finally(() => {
+        dispatch({type:'SET_LOADING', payload: false})
+        } )
         getMoviesByGenre(28).then((d) => {
             dispatch({type:'SET_ACTION', payload:d})
         })

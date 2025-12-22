@@ -1,4 +1,4 @@
-import { StarIcon } from "../../assets/icons/StarIcon";
+import { StarIcon } from "@heroicons/react/24/solid";
 import "../card/cardStyle.css";
 interface MovieCardProps {
   adult?: boolean;
@@ -15,6 +15,7 @@ interface MovieCardProps {
   video?: boolean;
   vote_average?: number;
   vote_count?: number;
+  onClick?: () => void;
 }
 
 export const MovieCard = ({
@@ -22,6 +23,7 @@ export const MovieCard = ({
   title,
   vote_average,
   release_date,
+  onClick,
 }: MovieCardProps) => {
   return (
     <article
@@ -30,6 +32,7 @@ export const MovieCard = ({
     transition-all duration-500 ease-out
     hover:scale-[1.02] hover:-translate-y-2
   "
+      onClick={onClick}
     >
       <div className="relative aspect-2/3 overflow-hidden rounded-3xl">
         <img
@@ -53,27 +56,13 @@ export const MovieCard = ({
 
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-1.5">
-                <StarIcon />
+                <StarIcon className="size-6 text-amber-400" />
                 <span className="text-sm font-medium text-[rgb(250_250_250)]">
                   {vote_average?.toFixed(1)}
                 </span>
               </div>
             </div>
           </div>
-        </div>
-
-        <div className="absolute top-4 right-4 flex flex-col gap-2 opacity-0 translate-x-4 transition-all duration-500 group-hover:opacity-100 group-hover:translate-x-0">
-          <button
-            className="glass-card p-2.5 transition-all duration-300 hover:bg-glass-highlight"
-            aria-label="Add to watchlist"
-          ></button>
-        </div>
-
-        <div className="absolute inset-0 flex items-center justify-center opacity-0 transition-all duration-500 group-hover:opacity-100">
-          <button
-            className="glass-card p-5 rounded-full transition-all duration-300 hover:scale-110 hover:bg-glass-highlight"
-            aria-label={`Play ${title}`}
-          ></button>
         </div>
       </div>
 
