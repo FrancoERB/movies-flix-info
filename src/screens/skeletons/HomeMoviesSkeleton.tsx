@@ -1,12 +1,7 @@
 import { MovieCardSkeleton } from "./MovieCardSkeleton";
-type MovieCarouselSkeletonProps = {
-  title?: string;
-};
-
-export const HomeMoviesSkeleton = ({ title }: MovieCarouselSkeletonProps) => {
+export const HomeMoviesSkeleton = () => {
   return (
     <section className="relative">
-      {/* Title */}
       <div className="container my-6 px-[max(1rem,calc((100vw-1280px)/2+1rem))]">
         <div className="h-7 w-48 rounded bg-neutral-800 animate-pulse" />
       </div>
