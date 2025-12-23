@@ -14,7 +14,7 @@ export const Home = () => {
       {isLoading ? (
         <>
           <HeroCarouselSkeleton />
-          <HomeMoviesSkeleton title="Cargando" />
+          <HomeMoviesSkeleton />
         </>
       ) : (
         <>
