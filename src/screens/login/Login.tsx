@@ -1,5 +1,5 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import * as yup from "yup";
@@ -9,6 +9,7 @@ import { EyeOff } from "../../assets/icons/EyeOff";
 import { Film } from "../../assets/icons/Film";
 import { Lock } from "../../assets/icons/Lock";
 import { Mail } from "../../assets/icons/Mail";
+import { isAuthenticated, setSessionToken } from "../../auth/session";
 
 type LoginForm = {
   email: string;
@@ -18,6 +19,12 @@ type LoginForm = {
 export const Login = () => {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
+
+  useEffect(() => {
+    if (isAuthenticated()) {
+      navigate("/home", { replace: true });
+    }
+  }, []);
 
   const loginSchema = yup.object().shape({
     email: yup
@@ -49,9 +56,9 @@ export const Login = () => {
       alert("Usuario o contraseña incorrectos");
       return;
     }
-
+    setSessionToken("fake-token-37812738123128371283");
     alert("Bienvenido");
-    navigate("/home");
+    navigate("/home", { replace: true });
   };
 
   return (
