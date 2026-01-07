@@ -8,7 +8,12 @@ import { Link } from "react-router-dom";
 import { routesLinks } from "../../router/Routes";
 
 export const NavBar = () => {
-  const hiddenRoutes = ["Registro", "IniciarSesion", "MovieDetail"];
+  const hiddenRoutes = [
+    "Registro",
+    "IniciarSesion",
+    "MovieDetail",
+    "SeriesDetail",
+  ];
   const navLinks = routesLinks.filter((r) => !hiddenRoutes.includes(r.name));
   const [notificationIsOpen, setnotificationIsOpen] = useState(false);
 

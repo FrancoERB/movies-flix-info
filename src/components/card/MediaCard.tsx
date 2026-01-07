@@ -1,30 +1,12 @@
 import { StarIcon } from "@heroicons/react/24/solid";
+import type { Media } from "../../domain/media";
 import "../card/cardStyle.css";
-interface MovieCardProps {
-  adult?: boolean;
-  backdrop_path?: string;
-  genre_ids?: number[];
-  id?: string;
-  original_language?: string;
-  original_title?: string;
-  overview?: string;
-  popularity?: number;
-  poster_path: string;
-  release_date?: Date;
-  title: string;
-  video?: boolean;
-  vote_average?: number;
-  vote_count?: number;
-  onClick?: () => void;
+
+interface Props {
+  media: Media;
 }
 
-export const MovieCard = ({
-  poster_path,
-  title,
-  vote_average,
-  release_date,
-  onClick,
-}: MovieCardProps) => {
+export const MediaCard = ({ media }: Props) => {
   return (
     <article
       className="
@@ -32,12 +14,12 @@ export const MovieCard = ({
     transition-all duration-500 ease-out
     hover:scale-[1.02] hover:-translate-y-2
   "
-      onClick={onClick}
+      onClick={media.onClick}
     >
       <div className="relative aspect-2/3 overflow-hidden rounded-3xl">
         <img
-          src={poster_path}
-          alt={`${title} poster`}
+          src={`https://image.tmdb.org/t/p/w500${media.posterPath}`}
+          alt={`${media.title} poster`}
           className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
         />
 
@@ -47,10 +29,10 @@ export const MovieCard = ({
           <div className="glass-card p-4 transition-all duration-500 group-hover:shadow-glass-hover">
             <div className="mb-3">
               <h3 className="text-lg font-semibold text-foreground leading-tight line-clamp-1">
-                {title}
+                {media.title}
               </h3>
               <p className="text-sm text-muted-foreground mt-0.5">
-                {release_date?.toString()}
+                {media.releaseDate?.toString()}
               </p>
             </div>
 
@@ -58,7 +40,7 @@ export const MovieCard = ({
               <div className="flex items-center gap-1.5">
                 <StarIcon className="size-6 text-amber-400" />
                 <span className="text-sm font-medium text-[rgb(250_250_250)]">
-                  {vote_average?.toFixed(1)}
+                  {media.voteAverage}
                 </span>
               </div>
             </div>

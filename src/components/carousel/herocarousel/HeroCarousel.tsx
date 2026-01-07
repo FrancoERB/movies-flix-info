@@ -6,19 +6,9 @@ import {
 } from "@heroicons/react/24/solid";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
-interface HeroSlide {
-  id: number;
-  title: string;
-  overview: string;
-  backdrop_path: string;
-  release_date?: Date;
-  popularity?: number;
-  onClick?: () => void;
-}
-
+import type { Media } from "../../../domain/media";
 interface HeroCarouselProps {
-  slides: HeroSlide[];
+  slides: Media[];
 }
 
 export const HeroCarousel = ({ slides }: HeroCarouselProps) => {
@@ -62,7 +52,7 @@ export const HeroCarousel = ({ slides }: HeroCarouselProps) => {
           {/* Background Image */}
           <div className="absolute inset-0">
             <img
-              src={`https://image.tmdb.org/t/p/original${slide.backdrop_path}`}
+              src={`https://image.tmdb.org/t/p/original${slide.posterPath}`}
               alt={slide.title}
               className="w-full h-full object-cover"
             />
@@ -76,14 +66,14 @@ export const HeroCarousel = ({ slides }: HeroCarouselProps) => {
             <div className="max-w-2xl space-y-6">
               <div className="flex items-center gap-3 text-sm text-[rgb(153_153_153)]">
                 <span>
-                  {slide.release_date
-                    ? new Date(slide.release_date).toLocaleDateString("es-AR")
+                  {slide.releaseDate
+                    ? new Date(slide.releaseDate).toLocaleDateString("es-AR")
                     : "Sin fecha"}
                 </span>
 
                 <span className="flex items-center gap-1">
                   <span className="text-[rgb(255_198_26)]">★</span>
-                  {slide.popularity}
+                  {slide.voteAverage}
                 </span>
               </div>
               <h1 className="text-5xl md:text-7xl font-bold text-[rgb(250_250_250)] tracking-tight leading-none">

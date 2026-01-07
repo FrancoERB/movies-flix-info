@@ -58,7 +58,8 @@ export const Register = () => {
     };
     users.push(newUser);
     localStorage.setItem("users", JSON.stringify(users));
-    navigate("/home");
+    alert("Registro exitoso, inicie sesión con sus credenciales");
+    navigate("/");
   };
 
   return (

@@ -1,25 +1,15 @@
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { MovieCard } from "../../card/MovieCard";
-
-interface Movie {
-  id: number;
-  title: string;
-  poster_path: string;
-  release_date?: Date;
-  vote_average?: number;
-}
+import type { Media } from "../../../domain/media";
+import { MediaCard } from "../../card/MediaCard";
 
 interface CategoryCarrouselProps {
   title: string;
-  movies: Movie[];
+  media: Media[];
 }
 
-export const CategorysCarousel = ({
-  title,
-  movies,
-}: CategoryCarrouselProps) => {
+export const CategorysCarousel = ({ title, media }: CategoryCarrouselProps) => {
   const scrollRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
 
@@ -43,7 +33,7 @@ export const CategorysCarousel = ({
 
     ref.addEventListener("scroll", checkScroll);
     return () => ref.removeEventListener("scroll", checkScroll);
-  }, [movies]);
+  }, [media]);
 
   const scroll = (direction: "Left" | "Right") => {
     if (!scrollRef.current) return;
@@ -55,8 +45,8 @@ export const CategorysCarousel = ({
     });
   };
 
-  const onClickMovieId = (id: number) => {
-    navigate(`/movieDetail/${id}`);
+  const onClickMedia = (media: Media) => {
+    navigate(`/movieDetail/${media.id}`);
   };
 
   return (
@@ -88,15 +78,13 @@ export const CategorysCarousel = ({
           ref={scrollRef}
           className="flex gap-4 my-10 overflow-x-auto scrollbar-hide px-[max(1rem,calc((100vw-1280px)/2+1rem))] pb-4"
         >
-          {movies.map((movie) => (
-            <div key={movie.id} className="shrink-0 animate-fade-up">
-              <MovieCard
-                title={movie.title}
-                poster_path={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                release_date={movie.release_date}
-                vote_average={movie.vote_average}
-                onClick={() => onClickMovieId(movie.id)}
-              />
+          {media.map((item) => (
+            <div
+              key={item.id}
+              className="shrink-0 animate-fade-up"
+              onClick={() => onClickMedia(item)}
+            >
+              <MediaCard media={item} />
             </div>
           ))}
         </div>

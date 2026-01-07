@@ -20,11 +20,11 @@ export const Home = () => {
         <>
           <NavBar />
           <HeroCarousel slides={popular} />
-          <CategorysCarousel title="💥 Action" movies={action} />
-          <CategorysCarousel title="🚀 Sci-Fi" movies={scifi} />
-          <CategorysCarousel title="🚀 Adventure" movies={adventure} />
-          <CategorysCarousel title="🚀 Horror" movies={horror} />
-          <CategorysCarousel title="🚀 Mistery" movies={mistery} />
+          <CategorysCarousel title="💥 Accion" media={action} />
+          <CategorysCarousel title="👽 Ciencia Ficcion" media={scifi} />
+          <CategorysCarousel title="🏔️ Aventura" media={adventure} />
+          <CategorysCarousel title="😱 Terror" media={horror} />
+          <CategorysCarousel title="🕵 Misterio" media={mistery} />
           <Footer />
         </>
       )}
