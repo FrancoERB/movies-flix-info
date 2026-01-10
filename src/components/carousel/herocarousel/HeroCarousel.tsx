@@ -26,12 +26,12 @@ export const HeroCarousel = ({ slides }: HeroCarouselProps) => {
     setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
   const nextSlide = () => setCurrentSlide((prev) => (prev + 1) % slides.length);
 
-  const onClickMovieId = (id: number) => {
-    navigate(`/movieDetail/${id}`);
+  const onClickMovieId = (id: number, media: string) => {
+    navigate(`/mediaDetail/${id}/${media}`);
   };
 
   const onClickButtonPlay = (id: number) => {
-    navigate(`/movieDetail/${id}`);
+    navigate(`/mediaDetail/${id}`);
     setTimeout(() => {
       window.scrollTo({ top: 1300, behavior: "smooth" });
     }, 300);

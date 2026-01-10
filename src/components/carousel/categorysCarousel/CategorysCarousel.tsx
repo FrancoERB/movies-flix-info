@@ -46,7 +46,7 @@ export const CategorysCarousel = ({ title, media }: CategoryCarrouselProps) => {
   };
 
   const onClickMedia = (media: Media) => {
-    navigate(`/movieDetail/${media.id}`);
+    navigate(`/mediaDetail/${media.id}/${media.mediaType}`);
   };
 
   return (

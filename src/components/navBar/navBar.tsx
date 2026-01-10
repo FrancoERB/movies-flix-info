@@ -11,7 +11,7 @@ export const NavBar = () => {
   const hiddenRoutes = [
     "Registro",
     "IniciarSesion",
-    "MovieDetail",
+    "MediaDetail",
     "SeriesDetail",
   ];
   const navLinks = routesLinks.filter((r) => !hiddenRoutes.includes(r.name));

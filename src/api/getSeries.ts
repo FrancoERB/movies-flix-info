@@ -20,3 +20,22 @@ export const getSeriesTopRated = async(): Promise<SerieDTO[]> => {
   const res = await api.get("/tv/top_rated");
   return res.data.results;
 }
+
+export const getSerieById = async (id: string) => {
+  const res = await api.get(`/tv/${id}`);
+  console.log('series test', res);
+  
+  return res.data;
+};
+
+export const getSerieTrailer = async (
+  id: string
+): Promise<string | null> => {
+  const res = await api.get(`/tv/${id}/videos`);
+
+  const trailer = res.data.results.find(
+    (v: any) => v.type === "Trailer" && v.site === "YouTube"
+  );
+
+  return trailer ? trailer.key : null;
+};

@@ -24,7 +24,7 @@ export const getMovieById = async (id : string | number ) => {
   return res.data
 }
 
-export const getMovieTrailer = async (movieId : number) : Promise<String | null > => {
+export const getMovieTrailer = async (movieId : string) : Promise<string | null > => {
   const res = await api.get(`/movie/${movieId}/videos?language=es-ES`)
   if (!res) return null;
   const videos: MovieVideo[] = res.data.results;

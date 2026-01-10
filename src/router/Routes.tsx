@@ -1,9 +1,8 @@
 import type { ReactElement } from "react";
 import { Home } from "../screens/home/Home";
 import Login from "../screens/login/Login";
-import { MovieDetail } from "../screens/movieDetail/MovieDetail";
+import { MediaDetailPage } from "../screens/movieDetail/MediaDetailPage";
 import { Register } from "../screens/register/Register";
-import { SerieDetail } from "../screens/serieDetail/SerieDetail";
 import { Series } from "../screens/series/Series";
 
 export interface AppRoute {
@@ -24,15 +23,15 @@ export const routesLinks: AppRoute[] = [
     protected: false,
   },
   {
-    name: "MovieDetail",
-    path: "/movieDetail/:id",
-    element: <MovieDetail />,
+    name: "MediaDetail",
+    path: "/mediaDetail/:id/:mediaType",
+    element: <MediaDetailPage />,
     protected: true,
   },
   {
     name: "SeriesDetail",
-    path: "/serieDetail/:id",
-    element: <SerieDetail />,
+    path: "/mediaDetail/:id/:mediaType",
+    element: <MediaDetailPage />,
     protected: true,
   },
 ];
