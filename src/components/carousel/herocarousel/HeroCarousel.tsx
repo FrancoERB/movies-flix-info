@@ -26,7 +26,7 @@ export const HeroCarousel = ({ slides }: HeroCarouselProps) => {
     setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
   const nextSlide = () => setCurrentSlide((prev) => (prev + 1) % slides.length);
 
-  const onClickMovieId = (id: number, media: string) => {
+  const onClickMovieId = (id: number, media: "movie" | "serie") => {
     navigate(`/mediaDetail/${id}/${media}`);
   };
 
@@ -95,7 +95,7 @@ export const HeroCarousel = ({ slides }: HeroCarouselProps) => {
                 <button
                   className="rounded-full flex text-white px-8 py-3 gap-2 border-[rgb(51_51_51)]/50 bg-[rgb(36_36_36)] backdrop-blur-sm hover:bg-[rgb(36_36_36)]/50"
                   onClick={() => {
-                    onClickMovieId(slide.id);
+                    onClickMovieId(slide.id, slide.mediaType);
                   }}
                 >
                   <InformationCircleIcon className="size-6" />

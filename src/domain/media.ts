@@ -1,5 +1,3 @@
-export type MediaType = "movie" | "serie";
-
 export interface Media {
   id: number;
   title: string;
@@ -7,6 +5,6 @@ export interface Media {
   overview?: string;
   voteAverage?: number;
   releaseDate?: string;
-  mediaType?: MediaType;
+  mediaType: 'movie' | 'serie';
   onClick?: () => void;
 }

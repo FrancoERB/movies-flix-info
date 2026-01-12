@@ -1,5 +1,3 @@
-export type MediaType = "movie" | "serie";
-
 export interface MediaDetail {
   id: number;
   title: string;
@@ -9,7 +7,7 @@ export interface MediaDetail {
   voteAverage: number;
   year: number | null;
   genres: { id: number; name: string }[];
-  mediaType: MediaType;
+  mediaType: 'movie' | 'serie';
   releaseDate?: string
   trailerKey?: string | null;
   numberOfSeasons?: number;
