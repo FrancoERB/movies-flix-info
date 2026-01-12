@@ -23,8 +23,6 @@ export const getSeriesTopRated = async(): Promise<SerieDTO[]> => {
 
 export const getSerieById = async (id: string) => {
   const res = await api.get(`/tv/${id}`);
-  console.log('series test', res);
-  
   return res.data;
 };
 

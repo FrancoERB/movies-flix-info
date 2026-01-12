@@ -8,6 +8,7 @@ export interface MediaDetail {
   year: number | null;
   genres: { id: number; name: string }[];
   mediaType: 'movie' | 'serie';
+  cast: [];
   releaseDate?: string
   trailerKey?: string | null;
   numberOfSeasons?: number;

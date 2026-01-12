@@ -54,7 +54,8 @@ export const getMovieTrailer = async (movieId : string) : Promise<string | null 
   return trailer ? trailer.key : null;
 }
 
-export const getMovieCredits = async (movieId: number) => {
-  const res = await api.get(`/movie/${movieId}/credits?language=es-ES`);
+export const getMovieCredits = async (movieId: number, type: 'movie' | 'serie') => {
+  const apiType = type === "serie" ? "tv" : "movie";
+  const res = await api.get(`/${apiType}/${movieId}/credits?language=es-ES`);
   return res.data.cast;
 };

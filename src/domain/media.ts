@@ -5,6 +5,7 @@ export interface Media {
   overview?: string;
   voteAverage?: number;
   releaseDate?: string;
+  cast?: [];
   mediaType: 'movie' | 'serie';
   onClick?: () => void;
 }

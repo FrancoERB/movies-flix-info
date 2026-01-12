@@ -9,6 +9,8 @@ import {
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { getMediaDetail } from "../../api/getMovieDetail";
+import { getMovieCredits } from "../../api/getMovies";
+import { CastCarousel } from "../../components/carousel/castCarousel/CastCarousel";
 import { NavBar } from "../../components/navBar/navBar";
 import type { MediaDetail } from "../../domain/mediaDetail";
 
@@ -17,11 +19,11 @@ export const MediaDetailPage = () => {
     id: string;
     mediaType: "movie" | "serie";
   }>();
-  console.log("params", { id, mediaType });
 
   const navigate = useNavigate();
   const [media, setMedia] = useState<MediaDetail | null>(null);
   const [loading, setLoading] = useState(true);
+  const [credits, setCredits] = useState([]);
 
   useEffect(() => {
     if (!id || !mediaType) return;
@@ -30,6 +32,13 @@ export const MediaDetailPage = () => {
     getMediaDetail(id, mediaType)
       .then(setMedia)
       .finally(() => setLoading(false));
+  }, [id, mediaType]);
+
+  useEffect(() => {
+    if (!id) return;
+    if (mediaType !== "movie" && mediaType !== "serie") return;
+
+    getMovieCredits(Number(id), mediaType).then(setCredits);
   }, [id, mediaType]);
 
   if (loading) {
@@ -145,14 +154,14 @@ export const MediaDetailPage = () => {
             </div>
 
             {/* Cast */}
-            {/* {media.cast?.length > 0 && (
-            <div className="rounded-2xl bg-[#1A1A1A]/30 backdrop-blur-md border border-[#333333]/20 p-5">
-              <h3 className="text-sm font-medium text-[#999999] mb-2">
-                Reparto Principal
-              </h3>
-              <CastCarousel cast={media.cast} />
-            </div>
-          )} */}
+            {credits.length > 0 && (
+              <div className="rounded-2xl bg-[#1A1A1A]/30 backdrop-blur-md border border-[#333333]/20 p-5">
+                <h3 className="text-sm font-medium text-[#999999] mb-2">
+                  Reparto Principal
+                </h3>
+                <CastCarousel cast={credits} />
+              </div>
+            )}
           </div>
         </div>
 
