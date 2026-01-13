@@ -43,6 +43,7 @@ export const adaptMovieDetail = (
       ? new Date(movie.release_date).getFullYear()
       : null,
     releaseDate: movie.release_date,
+    cast: [],
     genres: movie.genres,
     mediaType: "movie",
     trailerKey,
@@ -60,6 +61,7 @@ export const adaptSerieDetail = (
   backdropPath: serie.backdrop_path,
   voteAverage: serie.vote_average,
   releaseDate: serie.first_air_date,
+  cast: [],
   genres: serie.genres.map((g: any) => g.name),
   numberOfSeasons: serie.number_of_seasons,
   year: serie.first_air_date,
