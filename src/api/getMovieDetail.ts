@@ -13,7 +13,6 @@ export const getMediaDetail = async (
   if (mediaType === "movie") {
     const movieDTO = await getMovieById(id);
     const trailerKey = await getMovieTrailer(id)
-    console.log('test', movieDTO, trailerKey);
     
     return adaptMovieDetail(movieDTO, trailerKey);
   }
